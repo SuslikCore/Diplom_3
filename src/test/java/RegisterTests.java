@@ -1,14 +1,10 @@
-import PageObject.ProfilePage;
-import RandomGenerator.Generator;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
-import PageObject.LoginPage;
-import PageObject.MainPage;
-import PageObject.RegisterPage;
 
-public class test extends BaseUITest{
+
+public class RegisterTests extends BaseUITest{
 
     @Test
     @DisplayName("Проверка регистрации")
@@ -18,38 +14,33 @@ public class test extends BaseUITest{
         String generatedEmail = generator.generateEmail(6);
         String generatedUserName = generator.generateUserName(6);
         String generatedPassword = generator.generatePassword(6);
+        setGeneratedData(generatedEmail ,generatedPassword);
 
-        mainPage.openMainPage();
-        mainPage.clickAccountLink();
-        loginPage.clickRegisterButton();
+        registerPage.openRegisterPage();
         registerPage.registerUser(generatedUserName, generatedEmail,generatedPassword);
         loginPage.loginIn(generatedEmail,generatedPassword);
         mainPage.clickAccountLink();
 
-        Assert.assertEquals(generatedEmail, profilePage.getEmail());
-
-        setGeneratedData(generatedEmail ,generatedPassword);
-
-        System.out.printf("%s%n%s%n%s%n", generatedEmail,generatedPassword,generatedUserName);
+        softAssertions.assertThat(generatedEmail).isEqualTo(profilePage.getEmail());
+        softAssertions.assertThat(generatedUserName).isEqualTo(profilePage.getUserName());
+        softAssertions.assertAll();
     }
 
     @Test
+    @DisplayName("Сообщение об ошибке при вводе пароля")
+    @Description("Появление ошибки при вводе менее 6сти символов")
     public void incorrectPasswordTest(){
-
+        
         String generatedEmail = generator.generateEmail(6);
         String generatedUserName = generator.generateUserName(6);
         String generatedPassword = generator.generatePassword(3);
+        setGeneratedData(generatedEmail ,generatedPassword);
 
-        mainPage.openMainPage();
-        mainPage.clickAccountLink();
+        loginPage.openLoginPage();
         loginPage.clickRegisterButton();
         registerPage.registerUser(generatedUserName, generatedEmail,generatedPassword);
 
         Assert.assertEquals("Некорректный пароль", registerPage.incorrectPasswordMessage());
-
-        setGeneratedData(generatedEmail ,generatedPassword);
-
-        System.out.printf("%s%n%s%n%s%n", generatedEmail,generatedPassword,generatedUserName);
     }
 
 

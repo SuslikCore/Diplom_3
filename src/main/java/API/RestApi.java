@@ -1,4 +1,4 @@
-package api;
+package API;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;

@@ -3,14 +3,15 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static PageObject.LoginPage.LOGIN_PAGE_URL;
 import static PageObject.MainPage.MAIN_PAGE_URL;
 import static PageObject.ProfilePage.PROFILE_PAGE_URL;
 
-public class AccountPageTests extends BaseUITest{
+public class ProfilePageTests extends BaseUITest{
 
     @Test
-    @DisplayName("Переход зарегистрированного пользователя до страницы профиля")
-    @Description("")
+    @DisplayName("Переход на страницу профиля")
+    @Description("Для зарегистрированного пользователя")
     public void goToProfilePageTest(){
 
         String generatedEmail = generator.generateEmail(6);
@@ -29,8 +30,8 @@ public class AccountPageTests extends BaseUITest{
     }
 
     @Test
-    @DisplayName("Переход из личного кабинета на главную страницу через ссылку Конструктор")
-    @Description("")
+    @DisplayName("Переход из личного кабинета на главную страницу ")
+    @Description("Через ссылку Конструктор")
     public void goToMainPageFromProfilePageViaConstructorButton(){
 
         String generatedEmail = generator.generateEmail(6);
@@ -41,14 +42,15 @@ public class AccountPageTests extends BaseUITest{
         registerPage.openRegisterPage();
         registerPage.registerUser(generatedUserName, generatedEmail,generatedPassword);
         loginPage.loginIn(generatedEmail,generatedPassword);
+        mainPage.clickAccountLink();
         profilePage.clickConstructorLink();
 
         Assert.assertEquals(MAIN_PAGE_URL, driver.getCurrentUrl());
     }
 
     @Test
-    @DisplayName("Переход из личного кабинета на главную страницу через лого")
-    @Description("")
+    @DisplayName("Переход из личного кабинета на главную страницу")
+    @Description("Через ссылку 'Лого'")
     public void goToMainPageFromProfilePageViaLogoLink(){
 
         String generatedEmail = generator.generateEmail(6);
@@ -59,10 +61,29 @@ public class AccountPageTests extends BaseUITest{
         registerPage.openRegisterPage();
         registerPage.registerUser(generatedUserName, generatedEmail,generatedPassword);
         loginPage.loginIn(generatedEmail,generatedPassword);
+        mainPage.clickAccountLink();
         profilePage.clickBurgerLogoLink();
 
         Assert.assertEquals(MAIN_PAGE_URL, driver.getCurrentUrl());
     }
 
+    @Test
+    @DisplayName("Выход из профиля")
+    @Description("Через кнопку 'Выйти'")
+    public void logOutViaLogOutButtonFromProfilePageTest(){
 
+        String generatedEmail = generator.generateEmail(6);
+        String generatedUserName = generator.generateUserName(6);
+        String generatedPassword = generator.generatePassword(6);
+        setGeneratedData(generatedEmail ,generatedPassword);
+
+        registerPage.openRegisterPage();
+        registerPage.registerUser(generatedUserName, generatedEmail,generatedPassword);
+        loginPage.loginIn(generatedEmail,generatedPassword);
+        mainPage.clickAccountLink();
+        profilePage.clickLogOutButton();
+        loginPage.allElementsArePresent();
+
+        Assert.assertEquals(LOGIN_PAGE_URL, driver.getCurrentUrl());
+    }
 }

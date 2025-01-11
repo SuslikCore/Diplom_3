@@ -1,4 +1,4 @@
-package api;
+package API;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
