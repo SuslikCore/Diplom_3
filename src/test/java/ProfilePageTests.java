@@ -3,9 +3,9 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static PageObject.LoginPage.LOGIN_PAGE_URL;
-import static PageObject.MainPage.MAIN_PAGE_URL;
-import static PageObject.ProfilePage.PROFILE_PAGE_URL;
+import static pageobject.LoginPage.LOGIN_PAGE_URL;
+import static pageobject.MainPage.MAIN_PAGE_URL;
+import static pageobject.ProfilePage.PROFILE_PAGE_URL;
 
 public class ProfilePageTests extends BaseUITest{
 

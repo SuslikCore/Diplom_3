@@ -2,7 +2,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 
-import static PageObject.LoginPage.LOGIN_PAGE_URL;
+import static pageobject.LoginPage.LOGIN_PAGE_URL;
 
 public class GoToLoginPageTests extends BaseUITest{
 

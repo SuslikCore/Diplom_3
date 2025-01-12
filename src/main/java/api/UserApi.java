@@ -1,4 +1,4 @@
-package API;
+package api;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
@@ -32,29 +32,6 @@ public class UserApi extends RestApi {
                 .body(user)
                 .when()
                 .post(LOGIN_USER_URI)
-                .then();
-    }
-
-    @Step("Изменяем данные пользователя")
-    public ValidatableResponse changeUserData(UserData user,String accessToken){
-        return given()
-                .spec(requestSpecification())
-                .header("Authorization",accessToken)
-                .and()
-                .body(user)
-                .when()
-                .patch(CHANGE_USER_DATA_URI)
-                .then();
-    }
-
-    @Step("Изменяем данные без токена")
-    public ValidatableResponse changeUserData(UserData user){
-        return given()
-                .spec(requestSpecification())
-                .and()
-                .body(user)
-                .when()
-                .patch(CHANGE_USER_DATA_URI)
                 .then();
     }
 

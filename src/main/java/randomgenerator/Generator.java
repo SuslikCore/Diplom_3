@@ -1,6 +1,5 @@
-package RandomGenerator;
+package randomgenerator;
 import org.apache.commons.text.RandomStringGenerator;
-import java.util.List;
 
 
 public class Generator {

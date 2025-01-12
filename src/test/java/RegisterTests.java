@@ -42,6 +42,4 @@ public class RegisterTests extends BaseUITest{
 
         Assert.assertEquals("Некорректный пароль", registerPage.incorrectPasswordMessage());
     }
-
-
 }
