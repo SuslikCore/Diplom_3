@@ -1,7 +1,7 @@
 import api.UserApi;
 import browser.Browser;
 import pageobject.*;
-import randomgenerator.Generator;
+import random.generator.Generator;
 import io.restassured.response.ValidatableResponse;
 import model.UserData;
 import org.assertj.core.api.SoftAssertions;

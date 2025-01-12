@@ -1,4 +1,4 @@
-package randomgenerator;
+package random.generator;
 import org.apache.commons.text.RandomStringGenerator;
 
 
